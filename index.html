@@ -1,93 +1,28 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Palang Merah Indonesia — Demo 8 Sidebar Animasi Digital</title>
-  <meta name="description" content="Template demo bertema Palang Merah Indonesia dengan 8 sidebar dan animasi digital pada tiap sidebar." />
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body,#app{height:100%}
-    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:#0b1020;color:#e6eef8}
-
-    .app{display:flex;height:100vh;gap:20px;padding:28px}
-    .sidebars{width:120px;display:flex;flex-direction:column;gap:12px;flex-shrink:0}
-    .sidebar{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border-radius:12px;padding:10px;position:relative;overflow:hidden;cursor:pointer;min-height:64px;display:flex;align-items:center;justify-content:flex-start;gap:8px;border:1px solid rgba(255,255,255,0.04);transition:transform .25s ease}
-    .sidebar:hover{transform:translateX(6px)}
-    .sidebar.active{box-shadow:0 8px 24px rgba(0,0,0,0.6);border-color:rgba(255,255,255,0.08)}
-
-    .sb-icon{width:44px;height:44px;border-radius:8px;display:grid;place-items:center;background:rgba(255,255,255,0.02);backdrop-filter:blur(3px)}
-    .sb-label{font-size:12px;line-height:1;color:#dfeeff}
-
-    .content{flex:1;background:linear-gradient(180deg,#051226 0%, #071025 100%);border-radius:14px;padding:24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.03);min-height:0}
-    header{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-    .logo{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-    .logo svg{width:44px;height:44px;flex-shrink:0}
-    h1{font-size:20px}
-    p.lead{color:#9fb3d6;margin-top:6px;max-width:600px}
-
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}
-    .card{padding:18px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
-
-    /* Animations */
-    .neon{position:absolute;inset:0;pointer-events:none}
-    .neon::before{content:'';position:absolute;inset:-30%;background:radial-gradient(circle at 10% 10%, rgba(255,0,0,0.25), transparent 6%, transparent 40%),radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06), transparent 10%);filter:blur(10px);animation:pulse 2.6s infinite}
-    @keyframes pulse{0%{transform:scale(.95);opacity:.7}50%{transform:scale(1.05);opacity:1}100%{transform:scale(.95);opacity:.7}}
-
-    .glitch{position:relative}
-    .glitch span{display:block;position:relative}
-    .glitch span::before,.glitch span::after{content:attr(data-text);position:absolute;left:0;top:0}
-    .glitch span::before{transform:translate(1px,-1px);clip-path:polygon(0 0,100% 0,100% 45%,0 45%);opacity:.8}
-    .glitch span::after{transform:translate(-1px,1px);clip-path:polygon(0 55%,100% 55%,100% 100%,0 100%);opacity:.8}
-    .glitch span::before{animation:gl1 2s infinite linear}
-    .glitch span::after{animation:gl2 2.2s infinite linear}
-    @keyframes gl1{0%{transform:translate(2px,-1px)}50%{transform:translate(-2px,0)}100%{transform:translate(2px,-1px)}}
-    @keyframes gl2{0%{transform:translate(-1px,2px)}50%{transform:translate(1px,-1px)}100%{transform:translate(-1px,2px)}}
-
-    .scanlines::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);background-size:100% 6px;opacity:.9;mix-blend-mode:overlay;animation:scroll 3s linear infinite}
-    @keyframes scroll{from{background-position:0 0}to{background-position:0 18px}}
-
-    .circuit svg path{stroke:#26e3ff;stroke-width:1.6;fill:none;stroke-opacity:.9;stroke-dasharray:200;stroke-dashoffset:200;animation:dash 3s linear infinite}
-    @keyframes dash{to{stroke-dashoffset:0}}
-
-    .matrix-canvas{position:absolute;inset:0;pointer-events:none;opacity:.85}
-    .particle-canvas{position:absolute;inset:0;pointer-events:none}
-
-    .wave svg path{fill:none;stroke:#9ee37a;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;animation:wave 2s linear infinite}
-    @keyframes wave{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-200}}
-
-    .dots{display:grid;grid-template-columns:repeat(6,8px);gap:4px;padding:6px}
-    .dots span{width:8px;height:8px;border-radius:2px;background:rgba(255,255,255,0.05);animation:blink 1.6s infinite}
-    .dots span:nth-child(3n){animation-delay:.2s}
-    .dots span:nth-child(4n){animation-delay:.5s}
-    @keyframes blink{0%{opacity:.12;transform:scale(.9)}50%{opacity:1;transform:scale(1.2)}100%{opacity:.12;transform:scale(.9)}}
-
-    @media (max-width:1024px){
-      h1{font-size:18px}
-      .sb-label{font-size:11px}
-    }
-
-    @media (max-width:768px){
-      .app{flex-direction:column;gap:14px;padding:16px}
-      .sidebars{flex-direction:row;width:100%;overflow-x:auto;gap:10px;padding-bottom:8px}
-      .sidebar{min-width:96px;flex:0 0 auto;transform:none!important}
-      .sidebar:hover{transform:none}
-    }
-
-    @media (max-width:480px){
-      .logo svg{width:32px;height:32px}
-      h1{font-size:16px}
-      p.lead{font-size:13px}
-      .cards{grid-template-columns:1fr}
-    }
-
-    .sidebar:focus{outline:2px solid rgba(255,255,255,0.08);outline-offset:2px}
-    .pmi-accent{color:#ff3b47}
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Palang Merah - Home</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Body sama dengan versi sebelumnya -->
-  <!-- ... (konten HTML tidak berubah, hanya CSS responsif diperluas) ... -->
+  <header>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="program-kerja.html">Program Kerja</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Selamat Datang di Website Palang Merah</h1>
+    <p>Bersama kita selamatkan nyawa dan ringankan penderitaan.</p>
+    <a href="program-kerja.html">Lihat Program Kerja</a>
+  </main>
+
+  <footer>
+    <p>© 2025 Palang Merah</p>
+  </footer>
 </body>
 </html>
