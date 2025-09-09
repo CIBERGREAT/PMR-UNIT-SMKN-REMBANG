@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Palang Merah - Kontak</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="program-kerja.html">Program Kerja</a>
+      <a href="kontak.html" class="active">Kontak</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Kontak Kami</h1>
+    <p>Hubungi Palang Merah untuk informasi, bantuan, atau kerja sama. Kami siap mendengar dari Anda.</p>
+
+    <div class="card fade-up">
+      <h2>Informasi Kontak</h2>
+      <p><strong>Alamat:</strong> Jl. Kemanusiaan No. 123, Jakarta</p>
+      <p><strong>Email:</strong> info@palangmerah.example</p>
+      <p><strong>Telepon:</strong> +62 21 1234 5678</p>
+    </div>
+
+    <div class="card fade-up">
+      <h2>Kirim Pesan</h2>
+      <form onsubmit="event.preventDefault(); alert('Pesan terkirim! (Demo)');">
+        <input type="text" placeholder="Nama" required style="width:100%;padding:.6rem;margin:.4rem 0;border-radius:8px;border:1px solid #e5e7eb">
+        <input type="email" placeholder="Email" required style="width:100%;padding:.6rem;margin:.4rem 0;border-radius:8px;border:1px solid #e5e7eb">
+        <textarea placeholder="Pesan Anda" rows="4" style="width:100%;padding:.6rem;margin:.4rem 0;border-radius:8px;border:1px solid #e5e7eb"></textarea>
+        <button class="btn-primary" style="width:100%">Kirim</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Palang Merah</p>
+  </footer>
+</body>
+</html>
