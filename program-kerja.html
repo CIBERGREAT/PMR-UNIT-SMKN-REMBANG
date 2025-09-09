@@ -5,6 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Palang Merah - Program Kerja</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Tambahan khusus slider */
+    .slider-container {
+      position: relative;
+      max-width: 800px;
+      margin: 2rem auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,.2);
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      animation: fade 1s;
+    }
+    @keyframes fade {
+      from {opacity: 0.4;}
+      to {opacity: 1;}
+    }
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      padding: .8rem;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 18px;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+  </style>
 </head>
 <body>
   <header>
@@ -24,10 +60,39 @@
       <li>Bantuan darurat bencana</li>
       <li>Peningkatan kapasitas relawan</li>
     </ul>
+
+    <!-- Slider Foto -->
+    <div class="slider-container">
+      <img class="slide" src="images/program1.jpg" alt="Donor Darah">
+      <img class="slide" src="images/program2.jpg" alt="Pelatihan Kesehatan">
+      <img class="slide" src="images/program3.jpg" alt="Bantuan Bencana">
+
+      <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+      <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
   </main>
 
   <footer>
     <p>© 2025 Palang Merah</p>
   </footer>
+
+  <script>
+    let slideIndex = 0;
+    showSlide(slideIndex);
+
+    function changeSlide(n) {
+      showSlide(slideIndex += n);
+    }
+
+    function showSlide(n) {
+      let slides = document.getElementsByClassName("slide");
+      if (n >= slides.length) { slideIndex = 0; }
+      if (n < 0) { slideIndex = slides.length - 1; }
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slides[slideIndex].style.display = "block";
+    }
+  </script>
 </body>
 </html>
