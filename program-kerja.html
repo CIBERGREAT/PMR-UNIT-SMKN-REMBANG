@@ -40,6 +40,38 @@
     }
     .prev { left: 10px; }
     .next { right: 10px; }
+
+    /* Efek bercak darah animasi */
+    .blood-splash {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(180,0,0,0.7) 20%, rgba(255,0,0,0.1) 80%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .blood-splash.active {
+      animation: splashAnim 0.8s ease-out forwards;
+    }
+    @keyframes splashAnim {
+      0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0.8;
+      }
+      60% {
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.8);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -76,12 +108,16 @@
     <p>© 2025 Palang Merah</p>
   </footer>
 
+  <!-- Elemen bercak animasi -->
+  <div id="bloodSplash" class="blood-splash"></div>
+
   <script>
     let slideIndex = 0;
     showSlide(slideIndex);
 
     function changeSlide(n) {
       showSlide(slideIndex += n);
+      triggerBloodSplash();
     }
 
     function showSlide(n) {
@@ -92,6 +128,13 @@
         slides[i].style.display = "none";
       }
       slides[slideIndex].style.display = "block";
+    }
+
+    function triggerBloodSplash() {
+      const splash = document.getElementById("bloodSplash");
+      splash.classList.remove("active");
+      void splash.offsetWidth; // reset animation
+      splash.classList.add("active");
     }
   </script>
 </body>
