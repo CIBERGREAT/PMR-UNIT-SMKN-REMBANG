@@ -1,0 +1,111 @@
+:root {
+  --red: #d62828;
+  --red-light: #f87171;
+  --dark: #121212;
+  --muted: #6b7280;
+  --bg: linear-gradient(135deg, #fff5f5, #ffecec);
+  --container: 1100px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--dark); line-height: 1.6; }
+
+/* Container */
+main, header, footer {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Navbar */
+header {
+  background: white;
+  box-shadow: 0 2px 8px rgba(16,24,40,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+nav a {
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+nav a:hover { color: var(--red); }
+nav a.active {
+  color: var(--red);
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 2px;
+}
+
+/* Heading */
+h1, h2, h3 {
+  background: linear-gradient(135deg, var(--red), var(--red-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+/* Buttons */
+a.btn, button {
+  display: inline-block;
+  padding: .6rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--red), var(--red-light));
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(214,40,40,.3);
+}
+.btn-primary:hover { transform: translateY(-2px); }
+
+/* Card */
+.card {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  margin-bottom: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.1);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: .9rem;
+  color: var(--muted);
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+  background: linear-gradient(135deg, #fff, #ffecec);
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 1s ease; }
+.fade-down { animation: fadeDown 1s ease; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav { flex-wrap: wrap; gap: 1rem; }
+}
