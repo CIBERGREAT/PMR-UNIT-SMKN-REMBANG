@@ -3,42 +3,83 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Palang Merah - Kontak</title>
+  <title>Palang Merah - Kegiatan PMR</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.2);
+      transition: transform .3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    .upload-box {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+      margin: 1.5rem 0;
+    }
+  </style>
 </head>
 <body>
   <header>
     <nav>
       <a href="index.html">Beranda</a>
       <a href="program-kerja.html">Program Kerja</a>
-      <a href="kontak.html" class="active">Kontak</a>
+      <a href="kegiatan.html" class="active">Kegiatan PMR</a>
     </nav>
   </header>
 
   <main>
-    <h1>Kontak Kami</h1>
-    <p>Hubungi Palang Merah untuk informasi, bantuan, atau kerja sama. Kami siap mendengar dari Anda.</p>
+    <h1>Kegiatan Palang Merah Remaja</h1>
+    <p>Dokumentasi kegiatan PMR yang telah dilakukan. Kamu juga bisa menambahkan foto kegiatan.</p>
 
-    <div class="card fade-up">
-      <h2>Informasi Kontak</h2>
-      <p><strong>Alamat:</strong> Jl. Kemanusiaan No. 123, Jakarta</p>
-      <p><strong>Email:</strong> info@palangmerah.example</p>
-      <p><strong>Telepon:</strong> +62 21 1234 5678</p>
+    <!-- Upload Foto -->
+    <div class="upload-box fade-up">
+      <h2>Upload Foto Kegiatan</h2>
+      <input type="file" id="uploadInput" accept="image/*" multiple>
+      <button class="btn-primary" onclick="uploadPhotos()">Upload</button>
     </div>
 
-    <div class="card fade-up">
-      <h2>Kirim Pesan</h2>
-      <form onsubmit="event.preventDefault(); alert('Pesan terkirim! (Demo)');">
-        <input type="text" placeholder="Nama" required style="width:100%;padding:.6rem;margin:.4rem 0;border-radius:8px;border:1px solid #e5e7eb">
-        <input type="email" placeholder="Email" required style="width:100%;padding:.6rem;margin:.4rem 0;border-radius:8px;border:1px solid #e5e7eb">
-        <textarea placeholder="Pesan Anda" rows="4" style="width:100%;padding:.6rem;margin:.4rem 0;border-radius:8px;border:1px solid #e5e7eb"></textarea>
-        <button class="btn-primary" style="width:100%">Kirim</button>
-      </form>
+    <!-- Galeri Foto -->
+    <div id="gallery" class="gallery">
+      <img src="images/pmr1.jpg" alt="Kegiatan PMR 1">
+      <img src="images/pmr2.jpg" alt="Kegiatan PMR 2">
+      <img src="images/pmr3.jpg" alt="Kegiatan PMR 3">
     </div>
   </main>
 
   <footer>
     <p>© 2025 Palang Merah</p>
   </footer>
+
+  <script>
+    function uploadPhotos() {
+      const input = document.getElementById("uploadInput");
+      const gallery = document.getElementById("gallery");
+
+      for (const file of input.files) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.alt = "Foto Kegiatan PMR";
+          gallery.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+
+      input.value = ""; // reset input
+    }
+  </script>
 </body>
 </html>
